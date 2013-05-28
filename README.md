@@ -19,7 +19,7 @@ Here's a small example, in the form of a function I am actually using:
 ```php
 function get_modeL_results($car) {
   $api = new EdmundsCars\Styles;
-  $api->setApiKey('YOUR-API-KEY-HERE');
+  $api->set_api_key('YOUR-API-KEY-HERE');
   $res = $api->by_make_model_year($car['make'], $car['model'], $car['year']);
   $hash = sha1($json = json_encode($res));
   if(!is_dir('edmunds_json')) mkdir('edmunds_json');
