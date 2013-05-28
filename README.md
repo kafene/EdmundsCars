@@ -20,15 +20,20 @@ Here's a small example, in the form of a function I am actually using:
 include 'EdmundsCars.php';
 
 function get_modeL_results($car) {
-  $api = new EdmundsCars\Styles;
-  $api->set_api_key('YOUR-API-KEY-HERE');
-  $res = $api->by_make_model_year($car['make'], $car['model'], $car['year']);
-  $hash = sha1($json = json_encode($res));
-  if(!is_dir('edmunds_json')) mkdir('edmunds_json');
-  file_put_contents("edmunds_json/$hash.json", $json);
-  return $json;
+    $api = new EdmundsCars\Styles;
+    $api->set_api_key('YOUR-API-KEY-HERE');
+    $res = $api->by_make_model_year($car['make'], $car['model'], $car['year']);
+    $json = json_encode($res);
+    if(!is_dir('edmunds_json')) {
+        mkdir('edmunds_json');
+    }
+    file_put_contents("edmunds_json/". sha1($json) .".json", $json);
+    return $json;
 }
 
 ```
 
 Note that, at least for this case, I used the "Vehicle" API key.
+Also you'll have to throw in some calls to `sleep()` or `usleep()`
+if you're using this to grab a lot of results at once, or you will
+be rate limited by the API service.
