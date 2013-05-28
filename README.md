@@ -17,6 +17,8 @@ if you need to use this, it should be easy to get the hang of.
 Here's a small example, in the form of a function I am actually using:
 
 ```php
+include 'EdmundsCars.php';
+
 function get_modeL_results($car) {
   $api = new EdmundsCars\Styles;
   $api->set_api_key('YOUR-API-KEY-HERE');
